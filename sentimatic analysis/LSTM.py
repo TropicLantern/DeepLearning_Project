@@ -35,12 +35,12 @@ train_data = load_training_data('E:/pycharm_project/data/train-3.txt')
 # print(train_data[0])
 # print(type(train_data))
 
-
-# 自己写的分词
+# 分词用pynlpir可能准确率高一些
+# 下面是自己写的分词
 def get_tokenized(data):
     def tokenizer(text):
         return [tok.lower() for tok in text.split(' ')]
-    return [tokenizer(review) for review, _ in data]  #review是文本内容, 例如are wtf ... awww thanks !, 按照空格分词
+    return [tokenizer(review) for review, _ in data]  # review是文本内容, 例如are wtf ... awww thanks !, 按照空格分词
 
 
 text = get_tokenized(train_data)
@@ -145,6 +145,8 @@ print(X_train[0])
 print(X_train[1])
 # print(type(y_train))
 # print(y_train.shape)
+
+
 # 开始训练
 model.fit(
     X_train,
@@ -167,5 +169,3 @@ print(y_pred)
 print('accuracy %s' % accuracy_score(y_pred, ytest))
 target_names = ['消极', '积极', '中性']
 print(classification_report(ytest, y_pred, target_names=target_names)) # 出现问题一般是数据集太小了, 数据集划分的时候没有包含所有的种类
-
-
